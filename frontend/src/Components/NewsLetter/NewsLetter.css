@@ -1,0 +1,66 @@
+.newsLetter {
+  width: 65%;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: auto;
+  padding: 0px 140px;
+  margin-bottom: 150px;
+  background: linear-gradient(180deg, #fde1ff, #e1ffea22 60%);
+}
+.newsLetter h1 {
+  color: #090909;
+  font-size: 50px;
+  font-weight: 600;
+}
+.newsLetter p {
+  color: #171717;
+  font-size: 22px;
+  font-weight: 600;
+}
+.newsLetter input {
+  margin-left: 30px;
+  width: 500px;
+  border: none;
+  outline: none;
+  color: #7a7373;
+  font-family: poppins;
+  border-radius: 10px;
+  font-size: 16px;
+}
+.newsLetter button {
+  width: 282px;
+  height: 70px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.newsLetter div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  width: 730px;
+  height: 60px;
+  border-radius: 80px;
+  border: solid 1px #726a6a;
+  gap: 20px;
+}
+.newsLetter div button {
+  width: 282px;
+  height: 60px;
+  border: none;
+  outline: none;
+  border-radius: 80px;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #141212;
+  color: white;
+}
