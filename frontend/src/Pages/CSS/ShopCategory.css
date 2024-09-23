@@ -24,3 +24,16 @@
   font-weight: 600px;
   color: #888;
 }
+.shopCategory-loadMore{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto;
+  width: 220px;
+  height: 70px;
+  border-radius: 75px;
+  background: #ededed;
+  color:#787878;
+  font-weight: 500;
+  font-size: 18px;
+}

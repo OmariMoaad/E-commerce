@@ -33,6 +33,7 @@ const ShopCategory = (props) => {
           } else return null;
         })}
       </div>
+      <div className="shopCategory-loadMore">Load More</div>
     </div>
   );
 };
