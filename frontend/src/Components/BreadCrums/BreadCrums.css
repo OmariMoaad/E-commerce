@@ -1,8 +1,7 @@
 .breadcrum{
     display: flex;
-    gap: 20px;
     align-items: center;
     gap: 8px;
-    margin: 60px 170px;
+    margin: 20px 40px;
     text-transform: capitalize;
 }
