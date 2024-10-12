@@ -44,7 +44,7 @@ app.post("/upload", upload.single("product"), (req, res) => {
   });
 });
 
-//creating schema for products
+//schema for products
 const productSchema = mongoose.model("product", {
   id: {
     type: Number,
@@ -81,8 +81,17 @@ const productSchema = mongoose.model("product", {
 });
 
 app.post("/addproduct", async (req, res) => {
+  let products = await productSchema.find();
+  let id;
+  if (products.length > 0) {
+    let lastProduct = products[products.length - 1];
+    id = lastProduct.id + 1;
+  } else {
+    id = 1;
+  }
+
   const product = new productSchema({
-    id: req.body.id,
+    id: id,
     name: req.body.name,
     image: req.body.image,
     new_price: req.body.new_price,
@@ -91,8 +100,21 @@ app.post("/addproduct", async (req, res) => {
   });
   console.log(product);
   await product.save();
-  console.log("saved");
+  console.log("Added");
   res.json({ message: "Product added successfully", name: req.body.name });
+});
+
+// deleting product
+app.delete("/deleteproduct", async (req, res) => {
+  await productSchema.findOneAndDelete({ id: req.body.id });
+  res.json({ message: "Product deleted successfully", name: req.body.name });
+});
+
+//getting products
+app.get("/products", async (req, res) => {
+  const products = await productSchema.find();
+  console.log("fetched");
+  res.json(products);
 });
 
 app.listen(port, (error) => {
