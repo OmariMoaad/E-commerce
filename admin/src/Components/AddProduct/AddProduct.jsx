@@ -20,7 +20,6 @@ const AddProduct = () => {
   };
 
   const Add_Product = async () => {
-    console.log(productDetails);
     let responseData;
     let product = productDetails;
     let formData = new FormData();
@@ -38,8 +37,8 @@ const AddProduct = () => {
         responseData = data;
       });
 
-    if (responseData.success) {
-      product.file = responseData.file_url;
+    if (responseData) {
+      product.file = responseData.image_url;
       console.log(product);
     }
   };
