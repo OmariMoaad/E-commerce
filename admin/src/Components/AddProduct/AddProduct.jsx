@@ -4,8 +4,9 @@ import { React, useState } from "react";
 
 const AddProduct = () => {
   const [file, setFile] = useState(null);
-  const [product, setProduct] = useState({
+  const [productDetails, setProductDetails] = useState({
     name: "",
+    file: "",
     old_price: "",
     new_price: "",
     category: "men",
@@ -15,19 +16,40 @@ const AddProduct = () => {
     setFile(e.target.files[0]);
   };
   const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    setProductDetails({ ...productDetails, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
-    console.log(product);
-  }
+  const Add_Product = async () => {
+    console.log(productDetails);
+    let responseData;
+    let product = productDetails;
+    let formData = new FormData();
+    formData.append("product", file);
+
+    await fetch("http://localhost:8000/upload", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+      },
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        responseData = data;
+      });
+
+    if (responseData.success) {
+      product.file = responseData.file_url;
+      console.log(product);
+    }
+  };
   return (
     <div className="addproduct">
       <div className="addproduct-field">
         <p>Product Name</p>
         <input
           onChange={handleChange}
-          value={product.name}
+          value={productDetails.name}
           type="text"
           name="name"
           placeholder="type here"
@@ -38,7 +60,7 @@ const AddProduct = () => {
           <p>Old Price</p>
           <input
             onChange={handleChange}
-            value={product.old_price}
+            value={productDetails.old_price}
             type="text"
             name="old_price"
             placeholder="type here"
@@ -48,7 +70,7 @@ const AddProduct = () => {
           <p>New Price</p>
           <input
             onChange={handleChange}
-            value={product.new_price}
+            value={productDetails.new_price}
             type="text"
             name="new_price"
             placeholder="type here"
@@ -59,7 +81,7 @@ const AddProduct = () => {
         <p>Product Category</p>
         <select
           onChange={handleChange}
-          value={product.category}
+          value={productDetails.category}
           name="category"
           className="addproduct-select"
         >
@@ -84,7 +106,7 @@ const AddProduct = () => {
           hidden
         />
       </div>
-      <button onClick={handleSubmit} className="addproduct-btn">Add Product</button>
+      <button onClick={Add_Product} className="addproduct-btn">Add Product</button>
     </div>
   );
 };
