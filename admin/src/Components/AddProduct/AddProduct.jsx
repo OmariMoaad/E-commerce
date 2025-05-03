@@ -6,7 +6,7 @@ const AddProduct = () => {
   const [file, setFile] = useState(null);
   const [productDetails, setProductDetails] = useState({
     name: "",
-    file: "",
+    image: "",
     old_price: "",
     new_price: "",
     category: "men",
@@ -38,9 +38,21 @@ const AddProduct = () => {
       });
 
     if (responseData) {
-      product.file = responseData.image_url;
+      product.image = responseData.image_url;
       console.log(product);
     }
+    await fetch("http://localhost:8000/addproduct", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        data.success ? alert("Product Added") : alert("Product Not Added");
+      });
   };
   return (
     <div className="addproduct">

@@ -81,27 +81,34 @@ const productSchema = mongoose.model("product", {
 });
 
 app.post("/addproduct", async (req, res) => {
-  let products = await productSchema.find();
-  let id;
-  if (products.length > 0) {
-    let lastProduct = products[products.length - 1];
-    id = lastProduct.id + 1;
-  } else {
-    id = 1;
-  }
+  try {
+    let products = await productSchema.find();
+    let id = products.length > 0 ? products[products.length - 1].id + 1 : 1;
 
-  const product = new productSchema({
-    id: id,
-    name: req.body.name,
-    image: req.body.image,
-    new_price: req.body.new_price,
-    old_price: req.body.old_price,
-    category: req.body.category,
-  });
-  console.log(product);
-  await product.save();
-  console.log("Added");
-  res.json({ message: "Product added successfully", name: req.body.name });
+    if (!req.body.image) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing image field" });
+    }
+
+    const product = new productSchema({
+      id: id,
+      name: req.body.name,
+      image: req.body.image,
+      new_price: req.body.new_price,
+      old_price: req.body.old_price,
+      category: req.body.category,
+    });
+
+    await product.save();
+    console.log("Added:", product);
+    res.json({ success: true, message: "Product added successfully" });
+  } catch (err) {
+    console.error("Add product error:", err);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: err.message });
+  }
 });
 
 // deleting product
