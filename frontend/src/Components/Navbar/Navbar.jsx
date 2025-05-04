@@ -61,9 +61,21 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="nav-login-cart">
-        <Link to="/login">
-          <button>Login</button>
-        </Link>
+        {localStorage.getItem("aut-token") ? (
+          <button
+            onClick={() => {
+              localStorage.removeItem("aut-token");
+              window.location.replace("http://localhost:3000/");
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
+        )}
+
         <Link to="/cart">
           <img id="cart" src={cart_icon} alt="cart_icon"></img>
         </Link>
