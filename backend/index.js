@@ -166,8 +166,32 @@ app.post("/signup", async (req, res) => {
         id: user.id,
       },
     };
-    const token = jwt.sign(data, 'secret_ecom');
+    const token = jwt.sign(data, "secret_ecom");
     res.json({ success: true, message: "User created successfully", token });
+  }
+});
+
+//creating endpoint for user login
+app.post("/login", async (req, res) => {
+  let check = await userSchema.findOne({ email: req.body.email });
+  if (!check) {
+    res.status(400).json({ success: false, message: "user not found" });
+  } else {
+    if (check.password === req.body.password) {
+      const data = {
+        user: {
+          id: check.id,
+        },
+      };
+      const token = jwt.sign(data, "secret_ecom");
+      res.json({
+        success: true,
+        message: "User logged in successfully",
+        token,
+      });
+    } else {
+      res.status(400).json({ success: false, message: "wrong password" });
+    }
   }
 });
 
