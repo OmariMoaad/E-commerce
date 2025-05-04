@@ -112,9 +112,9 @@ app.post("/addproduct", async (req, res) => {
 });
 
 // deleting product
-app.delete("/deleteproduct", async (req, res) => {
+app.post("/deleteproduct", async (req, res) => {
   await productSchema.findOneAndDelete({ id: req.body.id });
-  res.json({ message: "Product deleted successfully", name: req.body.name });
+  res.json({ message: "Product deleted successfully" });
 });
 
 //getting products
