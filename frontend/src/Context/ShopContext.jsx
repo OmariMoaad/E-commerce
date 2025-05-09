@@ -12,11 +12,19 @@ const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState(getDefaultCart());
   const [all_product, setAll_Product] = useState([]);
 
-useEffect(() => fetch("http://localhost:8000/products")
-.then((res) => res.json())
-.then((data) => {
-  setAll_Product(data);
-}),[]);
+useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/products");
+        const data = await res.json();
+        setAll_Product(data);
+      } catch (err) {
+        console.error("Error fetching new collection:", err);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 
   const addToCart = (itemId) => {
