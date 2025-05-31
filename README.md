@@ -1,4 +1,3 @@
-/*************  ✨ Windsurf Command ⭐  *************/
 # E-commerce Website
 
 This is an e-commerce website built using React, Redux, and Node.js. It allows users to browse products, add them to a cart, and checkout. The website is responsive and has a user-friendly interface.
@@ -38,4 +37,3 @@ To set up the website, follow these steps:
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/username/ecommerce-website/blob/master/LICENSE) file for details.
-/*******  294e0961-5f72-4935-b05f-aaadc47f26c7  *******/
